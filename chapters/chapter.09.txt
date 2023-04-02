@@ -1,0 +1,2 @@
+# 记录问题和 refs(作为问题的 tips)，但不可提供答案
+# 格式请参考: https://gitweb.gentoo.org/sites/projects/comrel.git/tree/recruiters/quizzes/developer-quiz.txt
