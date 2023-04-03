@@ -1,2 +1,10 @@
 # 记录问题和 refs(作为问题的 tips)，但不可提供答案
-# 格式请参考: https://gitweb.gentoo.org/sites/projects/comrel.git/tree/recruiters/quizzes/developer-quiz.txt
+
+== 补充问题
+
+0） 通用寄存器（X0-X31）的别名是不连续的，为什么？如临时寄存器是X5-X7, X28-X31; 被调用寄存器X8-X9，X18-X27
+
+1）RISC-V PC（Program Counter）
+  a）为什么PC没有设计成通用寄存器？
+
+  b）如何获取PC的值
