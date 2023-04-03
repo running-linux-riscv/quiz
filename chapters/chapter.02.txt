@@ -13,3 +13,5 @@
   a) li t0, 4096, 为什么不是-4096 (负数)
 
   b) 上述代码还能优化吗？
+
+2) chapter_2/benos 如何支持高版本的qemu - pmpaddr0, pmpcfg0
