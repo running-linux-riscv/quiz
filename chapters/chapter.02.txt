@@ -1,2 +1,15 @@
 # 记录问题和 refs(作为问题的 tips)，但不可提供答案
-# 格式请参考: https://gitweb.gentoo.org/sites/projects/comrel.git/tree/recruiters/quizzes/developer-quiz.txt
+
+
+
+== 补充问题
+0) 如何查看最终生成的elf文件的汇编？
+
+1) chapter_2/benos/sbi/sbi_boot.S
+        la sp, stacks_start
+        li t0, 4096
+        add sp, sp, t0
+
+  a) li t0, 4096, 为什么不是-4096 (负数)
+
+  b) 上述代码还能优化吗？
