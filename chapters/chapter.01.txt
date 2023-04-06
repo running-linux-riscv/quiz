@@ -25,5 +25,7 @@
 
 9) 32/64位系统,每个寄存器能存放多少位宽的数据,一个128位的数据,该如何存放?
 
-9) 以下这行代码,会用到哪些寄存器(rv64g指令集)?
+docs: https://github.com/riscv-non-isa/riscv-elf-psabi-doc/blob/master/riscv-cc.adoc#integer-calling-convention
+
+10) 以下这行代码,会用到哪些寄存器(rv64g指令集)?
   double a = 1 + 0.0d; 
