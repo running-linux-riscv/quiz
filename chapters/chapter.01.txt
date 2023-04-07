@@ -28,4 +28,16 @@
 docs: https://github.com/riscv-non-isa/riscv-elf-psabi-doc/blob/master/riscv-cc.adoc#integer-calling-convention
 
 10) 以下这行代码,会用到哪些寄存器(rv64g指令集)?
-  double a = 1 + 0.0d; 
+  double a = 1 + 0.0d;
+
+11) 根据所实现的扩展的不同， RISC-V CPU 所拥有的寄存器是否会有差异，具体说明。
+
+12) 各系统寄存器的各字段全称是什么？（方便记忆）
+
+13) 通常情况下， RISC-V 内存模式使用大端还是小端？
+
+14) 系统寄存器各节中频繁出现的「陷入」一词具体含义。
+
+15) 压缩指令存在的价值是什么？
+
+16) 本书的学习目的，以及学完能实现的目标是什么？
