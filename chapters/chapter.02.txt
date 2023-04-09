@@ -38,3 +38,5 @@
 11) OS 的 boot.S 中的 hang 部分做了什么，什么情况下会跳转到这个部分执行？
 
 12) 在编写 RISC-V 应用程序时，如何根据实际需求选择编译指令 "-mcmodel=" 的 medany 和 medlow 选项呢？
+
+13) 为何在编译 benos 和 mysbi ELF 的时候必须禁用 PIE (-fno-PIE) ? 不启用 -fomit-frame-pointer 会发生什么 ?
