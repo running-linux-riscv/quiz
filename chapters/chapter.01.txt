@@ -48,7 +48,7 @@ docs: https://github.com/riscv-non-isa/riscv-elf-psabi-doc/blob/master/riscv-cc.
 
 19) 为什么 mstatus 和 status 只对 V 和 F 拓展有专门的使能位 VS 和 FS， XS 作为其他拓展使能的含义是什么？
 
-20) 为什么香山处理器会出现高速缓存别名问题?为什么需要用硬件方式解决 VIPT 别名问题?
+20) 为什么香山处理器会出现高速缓存别名问题?为什么需要用硬件方式解决 VIPT 别名问题? - 可选, 参考 Ch 11 (11.5 11.6)
 
 21) 
     a) 裸机程序如何发现处理器支持何种扩展？
