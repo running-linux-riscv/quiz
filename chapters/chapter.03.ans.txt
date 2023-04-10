@@ -1,0 +1,72 @@
+参考答案
+
+0) gdb下如何查看/打印通用寄存器的值? 以及特殊寄存器的值 pc, mstatus, mcause, mepc..
+
+  查看可以用info
+  info registers pc
+  info registers mstatus
+  info registers mcause
+  info registers mepc
+  打印的话可以使用
+  print $pc # 打印PC寄存器的值
+  print $mstatus # 打印MSTATUS寄存器的值
+  print $mcause # 打印MCAUSE寄存器的值
+  print $mepc # 打印MEPC寄存器的值
+  p /x $mstatus # 打印的MSTATUS寄存器16进制形式的值
+
+  csr 寄存器的读取没有找到可用的方法
+  https://politics.stackexchange.com/questions/79093/what-does-the-term-equity-mean-in-diversity-equity-and-inclusion
+  https://github.com/riscv-collab/riscv-gnu-toolchain/issues/319
+
+
+1) 了解 LUI 指令的结构，对于 LI 指令说明其性质，并描述其实际指令可能是什么样的。
+
+LUI 是一个真实的指令，其对立即数进行左移 12 位之后按符号扩展；而 LI 则是一个伪指令，它是其它指令的组合，具体组合要根据所操作的立即数来确定，涉及到的指令可能有 LUI，ADDI，SLLI 等
+
+2) RISC-V 中对于 word 的定义，该如何理解？
+
+word（字长）本来是 CPU 能直接处理的数据的位数，在 MIPS 里 word 长度是32位，因为 MIPS 最开始是一个 32 位的指令集；RISC-V 虽然最开始就面向了 64 位（存疑），但是可能依然沿袭了 MIPS 的传统。
+
+3) 为什么 AUIPC 的寻址范围是 +/- 2GB （2^31 字节？），文中表述是否不恰当（2Gib?），理解并消歧义。
+
+实际的位是 32 位，包含一个符号位后，能覆盖的范围是 2^31 bits，如此理解。
+
+4) 3.4 一节计算 hi20 时，为何要抵消低 12 位符号位影响，如何理解？
+
+这只是一个计算上的问题，由于低 12 位是一个带符号的数，所以若最高位为 1 则必然为负数，对于这种情况，需要为高位加一以获取正确的坐标。
+
+5) 位移指令中， shamt 的具体含义是什么，是否有全称？（便于理解）
+
+立即数逻辑左移, Shift Left Logical Immediate, RISC-V-Reader-Chinese-v2p1.pdf P157
+
+6) 为何基本比较指令是由 S 开头的（由什么单词而来？）（便于理解）
+
+set，理解为比较后将结果设到寄存器中
+
+ 例子：sltu rd, rs1, rs2 无符号小于则置位(Set if Less Than, Unsigned)
+
+7) JAL 指令的范围为何是 +/- 1MB？文中解释是否有误？
+
++/- 1MB 无误，但使用 MiB 更能消歧义，解释容易导致误导，建议查 spec 获取更精准的回答。
+
+8) 对绝对地址的访问需要通过什么来实现?
+
+9) AUIPC 的最大寻址范围对 32 或者 64 位架构够用吗？出现超过 2G 的超长寻址该怎么解决？
+
+  auipc只能寻址到 PC +/- 2GB 的空间，对于大部分跳转来说都够用，但无法满足 32 或 64 位地址的上限
+  超长寻址或许会使用特殊的寄存器进行辅助，例如 gp？
+
+10) 面对寻址范围超过 ±4kb 的条件跳转指令，所谓的“松弛优化选择合适的跳转指令”可能会做哪些工作？
+
+11) 比较串口实现输出和用 ecall 指令实现输出有什么不同？
+  ecall 指令实现输出需要遵循 syscall 调用,依赖不同的系统实现.
+
+12) 使用伪指令有什么优点和缺点?
+  伪指令看起来直观，写起来方便，例如 ret call ，比直接写 jalr ，jal 易读得多，再例如 li，就比一长串 lui addi slli addi slli addi slli addi 清楚得多
+  但是对原来的汇编进行抽象之后可能会出现难以注意到的错误例如两次 ret
+
+13) 记忆指令有没有什么技巧?
+
+14) 是否可以用无条件跳转指令来获取到PC的值？
+
+15) 为什么RV64I只支持小于比较指令？

@@ -1,0 +1,97 @@
+0) 如何查看最终生成的elf文件的汇编？
+
+  objdump -D/-d benos.elf > benos.dis
+  readelf -a benos.elf > benos.dis
+
+1) chapter_2/benos/sbi/sbi_boot.S
+        la sp, stacks_start
+        li t0, 4096
+        add sp, sp, t0
+
+  a) li t0, 4096, 为什么不是-4096 (负数)
+
+   stacks_start是内存的低地址，而堆栈是从高地址往低生长的
+
+  b) 上述代码还能优化吗？如减少代码行数？
+
+   可以，把stacks_start修改为start_end，并定义为内存的高地址
+```
+@@ -3,15 +3,13 @@
+ .globl _start
+ _start:
+        /* setup stack with 4KB size */
+-       la sp, stacks_start
+-       li t0, 4096
+-       add sp, sp, t0
++       la sp, stacks_end
+
+        /* goto C */
+        tail sbi_main
+
+ .section .data
+ .align  12
+-.global stacks_start
+-stacks_start:
+        .skip 4096
++.global stacks_end
++stacks_end:
+```
+
+2) chapter_2/benos 如何支持高版本的qemu - pmpaddr0, pmpcfg0
+
+  高版本的QEMU需要在SBI中初始化PMP才能运行, 参考 Ch 10.3.2 P188
+  https://github.com/running-linux-riscv/riscv_programming_practice/commit/4e1e9aedf2955a911b5e66bfb7bd394f11c013c9
+
+3) 在运行实验 2-1 的时候遇到了 Ctrl + C 无法退出 QEMU 的问题, 补充学习了一下 QEMU 如何退出.
+
+  ctrl-a x
+
+4) 如何理解 "任何一种可执行程序都是由代码 (.text) 段 数据段 (.data) 段. 未初始化的数据 (.bss) 段组成的"
+
+  CPU架构分Instruction + Data，bss是特殊的data（未初始化的数据）
+
+5) 程序入口地址
+  a) SBI（mysbi.elf）的入口地址是多少？为什么设置成这个值，能改成其他的地址值吗？
+
+    0X8000 0000 由qemu设计决定（实际芯片也是一个固定地址），不能改
+
+  b) 为什么BenOS(benos.elf)的入口地址为0x8020 0000? 为什么设置成这个值，能改成其他的地址值吗？
+
+    0X8200 0000 由软件决定，在linker script里定义，可以修改
+
+6) 在SBI引导过程中如何从M模式切换到S模式？
+
+  chapter_2/benos/sbi/sbi_main.c (page 36,37)
+
+7) 在从M模式切换到S模式的过程中设置了一些异常(mepc/stvec)用于mret，为什么要这么做？
+
+  因为从M模式切换到S模式需要保存M模式下面的异常处理信息，以便从S模式返回到M模式的时候恢复异常处理
+
+8) 为何使用 8 字节作为在 Linker 脚本下的边缘对齐数，以及 35 页针对 11 行的描述是否不准确？
+
+不确定，描述修改为加上按 8 字节进行的对齐可能更好
+
+9) `sbi_main()` 函数下对于 MPP 与 MPIE 的设置该如何理解，详细说明。
+
+  include/asm/csr.h 里有对 PRV_S 的注释
+  MPP 是陷入 M 模式之前的 CPU 处理模式，这里把它设为了 1 （从 S 模式陷入 M 模式）
+  MIE 是中断使能位，用来使能和关闭 M 模式下的所有中断
+
+10) 为什么在 sbi，os，串口的初始化部分，一定要设置禁用中断，还有其他处理方法吗？
+
+11) OS 的 boot.S 中的 hang 部分做了什么，什么情况下会跳转到这个部分执行？
+
+  wfi wait for interrupt，让 cpu 进入低功耗状态，并且不断循环 hang 部分，就是常说的“挂起”状态
+
+12) 在编写 RISC-V 应用程序时，如何根据实际需求选择编译指令 "-mcmodel=" 的 medany 和 medlow 选项呢？
+
+  https://starfivetech.com/uploads/riscv-large-code-model-workaround.pdf
+
+  -mcmodel=medlow — Used for 32-bit architectures
+  -mcmodel=medany — Used for 64-bit architectures
+
+  For 32-bit architectures using -mcmodel=medlow, the full 32-bit address range is accessible for
+compiling and linking your program.
+  For 64-bit architectures which use -mcmodel=medany, code can be linked at any base address,
+  but linked global symbols follow a similar +/- 2GiB range restriction. Depending on the code
+  base address, there are scenarios where the negative range is generally not used.
