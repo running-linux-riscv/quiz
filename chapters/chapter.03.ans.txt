@@ -37,7 +37,7 @@ word（字长）本来是 CPU 能直接处理的数据的位数，在 MIPS 里 w
 
 5) 位移指令中， shamt 的具体含义是什么，是否有全称？（便于理解）
 
-立即数逻辑左移, Shift Left Logical Immediate, RISC-V-Reader-Chinese-v2p1.pdf P157
+shift amount 位移位数/位移量
 
 6) 为何基本比较指令是由 S 开头的（由什么单词而来？）（便于理解）
 
