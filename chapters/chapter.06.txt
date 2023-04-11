@@ -1,2 +1,6 @@
 # 记录问题和 refs(作为问题的 tips)，但不可提供答案
-# 格式请参考: https://gitweb.gentoo.org/sites/projects/comrel.git/tree/recruiters/quizzes/developer-quiz.txt
+
+0） page 107，图6.6 
+  a) 步骤(1) BootROM代码由谁加在到SRAM中？ CPU or 特殊硬件?
+
+  b) 步骤(2) "CPU上电复位" 这一步的作用是什么？必须要这一步动作吗
