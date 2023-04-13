@@ -17,3 +17,7 @@
 
 补充材料
  https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md
+
+0) 基本指令中，很多指令都是成对出现的，有addi指令，为何没有subi指令？
+
+1) 如何通过汇编代码，实现内存溢出效果?
