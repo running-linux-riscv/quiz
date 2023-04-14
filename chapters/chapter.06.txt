@@ -14,3 +14,6 @@
 
 这里找到了一个关于Linux地址空间分段的：https://github.com/torvalds/linux/blob/9195e5e0adbb8a9a5ee9ef0f9dedf6340d827405/arch/x86/include/asm/segment.h#L58
 
+2) 链接地址与运行地址的区别是什么，为什么它们不是恒等的？
+   在不同模式下（M/S/U），对程序的加载是否都依赖其入口地址？
+   在不同模式下针对这两个地址行为是否会有区别？
