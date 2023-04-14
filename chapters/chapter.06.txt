@@ -9,3 +9,8 @@
   a) 步骤(1) BootROM代码由谁加在到SRAM中？ CPU or 特殊硬件?
 
   b) 步骤(2) "CPU上电复位" 这一步的作用是什么？必须要执行这一步动作吗
+
+1)  链接脚本中两个段的地址实际使用的时候是怎么设置的？
+
+这里找到了一个关于Linux地址空间分段的：https://github.com/torvalds/linux/blob/9195e5e0adbb8a9a5ee9ef0f9dedf6340d827405/arch/x86/include/asm/segment.h#L58
+
