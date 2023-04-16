@@ -8,12 +8,29 @@
 0） page 107，图6.6 
   a) 步骤(1) BootROM代码由谁加在到SRAM中？ CPU or 特殊硬件?
 
+	NOR Flash 存储器
+
   b) 步骤(2) "CPU上电复位" 这一步的作用是什么？必须要执行这一步动作吗
 
+	通过 Open SBI 切换到S模式
+
 1)  链接脚本中两个段的地址实际使用的时候是怎么设置的？
+
+	根据代码字节数计算
 
 这里找到了一个关于Linux地址空间分段的：https://github.com/torvalds/linux/blob/9195e5e0adbb8a9a5ee9ef0f9dedf6340d827405/arch/x86/include/asm/segment.h#L58
 
 2) 链接地址与运行地址的区别是什么，为什么它们不是恒等的？
+
+	因为 DDR 比 NOR Flash 读写速度快
+	见P106
+
    在不同模式下（M/S/U），对程序的加载是否都依赖其入口地址？
+
+	我觉得是
+
    在不同模式下针对这两个地址行为是否会有区别？
+
+	S模式是内核入口处
+	U模式是虚拟地址
+
