@@ -4,3 +4,5 @@
 == 补充问题
 
 0) 8.2.5 mtval异常的虚拟地址如何理解？是指令地址，还是数据地址
+
+ref: riscv-privileged-20211203-1.pdf - page 6, page 41 (3.1.16)
