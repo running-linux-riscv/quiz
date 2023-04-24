@@ -1,2 +1,6 @@
 # 记录问题和 refs(作为问题的 tips)，但不可提供答案
-# 格式请参考: https://gitweb.gentoo.org/sites/projects/comrel.git/tree/recruiters/quizzes/developer-quiz.txt
+
+== 补充问题
+
+0） page 178, (3) 一级页表的页表项存放二级页表的物理地址，如何理解“物理地址”，为什么不是虚拟地址？
+
